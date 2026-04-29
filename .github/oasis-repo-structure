@@ -1,0 +1,31 @@
+OASIS/
+├── .github/
+│   └── workflows/
+│       ├── oasis-ci.yml
+│       ├── codeql.yml
+│       ├── release.yml
+│       └── dependabot-auto-merge.yml
+│
+├── src/
+│   └── oasis/
+│       ├── __init__.py
+│       ├── cli.py
+│       ├── core.py
+│       ├── config.py
+│       └── utils.py
+│
+├── tests/
+│   ├── test_core.py
+│   └── test_cli.py
+│
+├── docs/
+│   └── architecture.md
+│
+├── scripts/
+│   └── bootstrap.sh
+│
+├── .gitignore
+├── LICENSE
+├── README.md
+├── pyproject.toml
+└── requirements.txt
