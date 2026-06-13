@@ -5,7 +5,66 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # ───────────────────────────────
+  # Backend: Java (Maven)
+  # ───────────────────────────────
+  - package-ecosystem: "maven"
+    directory: "/backend"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      maven-minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    allow:
+      - dependency-type: "direct"
+    ignore:
+      - dependency-type: "indirect"
+    pull-request-branch-name:
+      separator: "-"
+    # Auto-merge patch updates
+    automerge: true
+
+  # ───────────────────────────────
+  # Backend: Python (pip)
+  # ───────────────────────────────
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    # Security-only updates
+    security-updates-only: true
+    automerge: true
+
+  # ───────────────────────────────
+  # Frontend: Node.js / TypeScript (npm)
+  # ───────────────────────────────
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      npm-minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    automerge: true
+
+  # ───────────────────────────────
+  # CI: GitHub Actions
+  # ───────────────────────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Security-only updates
+    security-updates-only: true
+    automerge: true
