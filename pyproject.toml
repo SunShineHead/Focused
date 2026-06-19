@@ -14,6 +14,9 @@ authors = [
 
 dependencies = []
 
+[project.optional-dependencies]
+dev = ["pytest", "flake8", "black", "isort"]
+
 [project.scripts]
 oasis = "oasis.cli:main"
 
