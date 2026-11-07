@@ -22,3 +22,18 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Hong_Kong"
+    open-pull-requests-limit: 5
+    groups:
+      stripe:
+        patterns: ["stripe*", "@stripe/*"]
+      next-ecosystem:
+        patterns: ["next", "react", "react-dom"]
+    versioning-strategy: "increase-if-necessary"
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "chore(deps)"
