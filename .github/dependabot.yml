@@ -3,6 +3,7 @@
 # Please see the documentation for all configuration options:
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
+# .github/dependabot.yml
 version: 2
 updates:
   # ───────────────────────────────
@@ -20,4 +21,19 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"      
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Hong_Kong"
+    open-pull-requests-limit: 5
+    groups:
+      stripe:
+        patterns: ["stripe*", "@stripe/*"]
+      next-ecosystem:
+        patterns: ["next", "react", "react-dom"]
+    versioning-strategy: "increase-if-necessary"
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "chore(deps)"
