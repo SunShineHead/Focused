@@ -1,0 +1,3 @@
+[build]
+  # Resolve the base from this repository, not a build-machine absolute path.
+  base = "."
