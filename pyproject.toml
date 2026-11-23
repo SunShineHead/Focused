@@ -9,16 +9,12 @@ description = "Focused OASIS Platform"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
-  { name="Wallace Huang" }
+  { name = "Wallace Huang" }
 ]
-
 dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest", "flake8", "black", "isort"]
 
 [project.scripts]
 oasis = "oasis.cli:main"
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
