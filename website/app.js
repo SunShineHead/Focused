@@ -11,7 +11,12 @@ menuButton.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
 });
 navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNavigation));
-document.addEventListener('keydown', event => { if (event.key === 'Escape') closeNavigation(); });
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape') return;
+  const restoreFocus = navigation.classList.contains('open') && navigation.contains(document.activeElement);
+  closeNavigation();
+  if (restoreFocus) menuButton.focus();
+});
 
 const filters = [...document.querySelectorAll('[data-filter]')];
 const cards = [...document.querySelectorAll('.project-card')];
