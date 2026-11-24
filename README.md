@@ -42,7 +42,7 @@ No upstream OASIS code or ontology files are included solely by this documentati
 
 ## Requirements
 
-- Python 3.13 or later
+- Python 3.12 or later
 - pip
 
 ## Install and run
