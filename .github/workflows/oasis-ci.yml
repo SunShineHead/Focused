@@ -2,8 +2,15 @@ name: OASIS CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      python-version:
+        description: Python version to test
+        type: string
+        default: "3.12"
 
 permissions:
   contents: read
@@ -13,6 +20,7 @@ env:
 
 jobs:
   test:
+    if: github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +30,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: ${{ inputs.python-version || '3.12' }}
 
       - name: Install dependencies
         run: |

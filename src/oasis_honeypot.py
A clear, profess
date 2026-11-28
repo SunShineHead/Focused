@@ -1,0 +1,102 @@
+"""Focused OASIS - Defensive Honeypot."""
+
+import asyncio
+import json
+import logging
+from datetime import datetime, timezone
+
+HOST = "127.0.0.1"
+PORT = 8088
+TIMEOUT = 5
+MAX_CONNECTIONS = 20
+
+logger = logging.getLogger("oasis.honeypot")
+
+
+class OasisHoneypot:
+    def __init__(self):
+        self.active_connections = 0
+
+    async def handle_connection(self, reader, writer):
+        if self.active_connections >= MAX_CONNECTIONS:
+            writer.close()
+            await writer.wait_closed()
+            return
+
+        self.active_connections += 1
+
+        try:
+            event = {
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "event": "connection_detected",
+                "service": "oasis_honeypot",
+            }
+
+            logger.info(json.dumps(event))
+
+            data = await asyncio.wait_for(
+                reader.read(1024),
+                timeout=TIMEOUT,
+            )
+
+            logger.info(json.dumps({
+                "event": "request_received",
+                "bytes_received": len(data),
+            }))
+
+            writer.write(
+                b"HTTP/1.1 200 OK\r\n"
+                b"Content-Type: text/plain\r\n"
+                b"Content-Length: 17\r\n"
+                b"Connection: close\r\n\r\n"
+                b"Service available"
+            )
+
+            await writer.drain()
+
+        except (TimeoutError, ConnectionError):
+            logger.info("Connection expired or disconnected")
+
+        finally:
+            self.active_connections -= 1
+            writer.close()
+
+            try:
+                await writer.wait_closed()
+            except ConnectionError:
+                pass
+
+    async def start(self):
+        server = await asyncio.start_server(
+            self.handle_connection,
+            HOST,
+            PORT,
+        )
+
+        logger.info("OASIS listening on %s:%s", HOST, PORT)
+
+        async with server:
+            await server.serve_forever()
+
+
+def main():
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s",
+        handlers=[
+            logging.FileHandler(
+                "oasis_events.log",
+                encoding="utf-8",
+            ),
+            logging.StreamHandler(),
+        ],
+    )
+
+    try:
+        asyncio.run(OasisHoneypot().start())
+    except KeyboardInterrupt:
+        logger.info("OASIS stopped")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,4 @@
-# Focused OASIS Platform
+# Focused
 
 Focused is a lightweight Python application built around the OASIS project. The current implementation provides a small, installable package and command-line status check, with a foundation for future OASIS capabilities.
 
@@ -12,7 +12,7 @@ Focused is a lightweight Python application built around the OASIS project. The 
 - GitHub Actions CI and CodeQL workflows in `.github/workflows/`.
 - Dependabot configuration for Python dependencies and GitHub Actions.
 
-## Requirements
+> **Project status:** Focused currently contains a small Python package and command-line status check. It is not the upstream OASIS ontology, does not implement OASIS `BehaviorManager`, and does not yet generate agents or behaviors. The references and research material below describe the upstream project and possible future integration; they are not claims of implemented functionality or affiliation.
 
 - Python 3.10 or later
 - pip
@@ -28,7 +28,7 @@ python -m pip install -e ".[dev]"
 For a standard installation without development tools:
 
 ```bash
-python -m pip install .
+python -m pip install -e ".[dev]"
 ```
 
 ## Run

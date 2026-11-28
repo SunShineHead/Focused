@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=75", "wheel"]
+requires = ["setuptools>=84.2.1", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,9 +7,13 @@ name = "oasis"
 version = "1.0.0"
 description = "Focused OASIS Platform"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
+license = "BSD-3-Clause"
 authors = [
-  { name = "Wallace Huang" }
+  { name = "Wallace Huang Jiajun" }
+]
+maintainers = [
+  { name = "SunShineHead" }
 ]
 dependencies = []
 

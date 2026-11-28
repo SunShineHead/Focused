@@ -1,0 +1,11 @@
+[build]
+  # The portfolio is a standalone static site, separate from the Python project.
+  base = "website"
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
