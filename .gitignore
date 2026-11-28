@@ -1,7 +1,33 @@
+# Caches
 .cache/
 __pycache__/
-*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Compiled / bytecode
 *.pyc
+*.pyo
+
+# Packaging / build artifacts
+*.egg-info/
 dist/
 build/
-.pytest_cache/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Environment / secrets
+.env
+
+# IDEs / OS
+.vscode/
+.idea/
+.DS_Store
